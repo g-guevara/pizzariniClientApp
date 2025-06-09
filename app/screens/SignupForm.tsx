@@ -1,20 +1,23 @@
-// app/screens/SignupForm.tsx - Versión corregida
+// app/screens/SignupForm.tsx - Versión con navegación a Welcome
+import { Ionicons } from '@expo/vector-icons';
 import React, { useEffect, useState } from "react";
 import {
   ActivityIndicator,
   Alert,
   Image,
+  StyleSheet,
   Text,
   TextInput,
   TouchableOpacity,
   View,
 } from "react-native";
 import { ApiService } from "../services/api";
-import { styles } from "../styles/SignupFormStyles";
 import { useToast } from '../utils/ToastContext';
 
 interface SignupFormProps {
   onSwitchToLogin: () => void;
+  onBackToWelcome: () => void;
+  onSignupSuccess: () => void;
   apiUrl: string;
 }
 
@@ -25,7 +28,7 @@ interface PasswordStrength {
   label: string;
 }
 
-export default function SignupForm({ onSwitchToLogin, apiUrl }: SignupFormProps) {
+export default function SignupForm({ onSwitchToLogin, onBackToWelcome, onSignupSuccess, apiUrl }: SignupFormProps) {
   const [loading, setLoading] = useState(false);
   const [signupName, setSignupName] = useState("");
   const [signupEmail, setSignupEmail] = useState("");
@@ -191,7 +194,7 @@ export default function SignupForm({ onSwitchToLogin, apiUrl }: SignupFormProps)
       
       // Esperar un momento y luego cambiar a login
       setTimeout(() => {
-        onSwitchToLogin();
+        onSignupSuccess();
         showToast('Ahora puedes iniciar sesión', 'success');
       }, 2000);
 
@@ -232,6 +235,11 @@ export default function SignupForm({ onSwitchToLogin, apiUrl }: SignupFormProps)
 
   return (
     <View style={styles.formContainer}>
+      {/* Back Button */}
+      <TouchableOpacity style={styles.backButton} onPress={onBackToWelcome}>
+        <Ionicons name="arrow-back" size={24} color="#333" />
+      </TouchableOpacity>
+
       {/* Logo Container */}
       <View style={styles.logoContainer}>
         <Image 
@@ -259,7 +267,6 @@ export default function SignupForm({ onSwitchToLogin, apiUrl }: SignupFormProps)
         onChangeText={setSignupEmail}
         keyboardType="email-address"
         autoCapitalize="none"
-
         autoCorrect={false}
         textContentType="emailAddress"
       />
@@ -393,3 +400,145 @@ export default function SignupForm({ onSwitchToLogin, apiUrl }: SignupFormProps)
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  formContainer: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    padding: 20,
+    backgroundColor: "#fff",
+  },
+  backButton: {
+    position: 'absolute',
+    top: 50,
+    left: 20,
+    zIndex: 1,
+    padding: 10,
+  },
+  logoContainer: {
+    alignItems: "center",
+    marginBottom: 30,
+  },
+  logo: {
+    width: 100,
+    height: 100,
+    resizeMode: "contain",
+  },
+  title: {
+    fontSize: 28,
+    fontWeight: "bold",
+    marginBottom: 25,
+    color: "#333",
+    textAlign: "center",
+  },
+  input: {
+    width: "100%",
+    height: 50,
+    borderWidth: 1,
+    borderColor: "#ddd",
+    borderRadius: 8,
+    paddingHorizontal: 15,
+    marginBottom: 15,
+    fontSize: 16,
+    backgroundColor: "#f9f9f9",
+  },
+  passwordContainer: {
+    width: "100%",
+    flexDirection: "row",
+    alignItems: "center",
+    marginBottom: 15,
+  },
+  passwordInput: {
+    flex: 1,
+    height: 50,
+    borderWidth: 1,
+    borderColor: "#ddd",
+    borderRadius: 8,
+    paddingHorizontal: 15,
+    fontSize: 16,
+    backgroundColor: "#f9f9f9",
+  },
+  showPasswordButton: {
+    position: "absolute",
+    right: 15,
+    height: 50,
+    justifyContent: "center",
+  },
+  showPasswordText: {
+    color: "#4285F4",
+    fontSize: 14,
+    fontWeight: "500",
+  },
+  passwordStrengthContainer: {
+    width: "100%",
+    marginBottom: 10,
+  },
+  passwordStrengthBar: {
+    width: "100%",
+    height: 4,
+    backgroundColor: "#e0e0e0",
+    borderRadius: 2,
+    marginBottom: 5,
+  },
+  passwordStrengthProgress: {
+    height: "100%",
+    borderRadius: 2,
+  },
+  passwordStrengthLabel: {
+    fontSize: 12,
+    fontWeight: "500",
+    textAlign: "right",
+  },
+  passwordRequirements: {
+    width: "100%",
+    marginBottom: 15,
+  },
+  requirementText: {
+    fontSize: 12,
+    marginBottom: 2,
+  },
+  requirementMet: {
+    color: "#4CAF50",
+  },
+  requirementNotMet: {
+    color: "#999",
+  },
+  passwordMatchText: {
+    fontSize: 12,
+    marginBottom: 15,
+    textAlign: "right",
+  },
+  passwordMatch: {
+    color: "#4CAF50",
+  },
+  passwordNoMatch: {
+    color: "#f44336",
+  },
+  button: {
+    width: "100%",
+    height: 50,
+    backgroundColor: "#4285F4",
+    borderRadius: 8,
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: 10,
+    marginBottom: 15,
+  },
+  buttonDisabled: {
+    backgroundColor: "#ccc",
+  },
+  buttonText: {
+    color: "#fff",
+    fontSize: 16,
+    fontWeight: "600",
+  },
+  switchButton: {
+    marginTop: 10,
+  },
+  switchButtonText: {
+    color: "#4285F4",
+    fontSize: 16,
+    textAlign: "center",
+  },
+});
