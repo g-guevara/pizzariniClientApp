@@ -1,8 +1,8 @@
-// app/components/Toast/CustomToast.tsx
+// app/components/toasts/CustomToast.tsx - Red Theme
 import React, { useEffect, useRef } from 'react';
 import { Animated, Dimensions, StyleSheet, Text } from 'react-native';
 
-export type ToastType = 'success' | 'error' | 'warning';
+export type ToastType = 'success' | 'error' | 'warning' | 'info';
 
 interface ToastProps {
   visible: boolean;
@@ -79,6 +79,11 @@ export const CustomToast: React.FC<ToastProps> = ({
           container: styles.warningContainer,
           text: styles.warningText,
         };
+      case 'info':
+        return {
+          container: styles.infoContainer,
+          text: styles.infoText,
+        };
       default:
         return {
           container: styles.defaultContainer,
@@ -112,12 +117,20 @@ const styles = StyleSheet.create({
     left: 20,
     right: 20,
     padding: 16,
-    borderRadius: 8,
+    borderRadius: 12,
     alignItems: 'center',
     justifyContent: 'center',
     minHeight: 52,
     maxWidth: width - 40,
     zIndex: 9999,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 4,
+    },
+    shadowOpacity: 0.2,
+    shadowRadius: 8,
+    elevation: 8,
   },
   text: {
     fontSize: 14,
@@ -139,12 +152,12 @@ const styles = StyleSheet.create({
     color: '#067647',
   },
   errorContainer: {
-    backgroundColor: '#FEF3F2',
+    backgroundColor: '#FEF2F2', // Light red background
     borderWidth: 1,
-    borderColor: '#D92D20',
+    borderColor: '#FECACA', // Light red border
   },
   errorText: {
-    color: '#D92D20',
+    color: '#DC2626', // Red text (matching theme)
   },
   warningContainer: {
     backgroundColor: '#FFFAEB',
@@ -153,5 +166,13 @@ const styles = StyleSheet.create({
   },
   warningText: {
     color: '#B54708',
+  },
+  infoContainer: {
+    backgroundColor: '#fef2f2', // Light red for info (matching theme)
+    borderWidth: 1,
+    borderColor: '#fecaca',
+  },
+  infoText: {
+    color: '#DC2626', // Red text for info (matching theme)
   },
 });

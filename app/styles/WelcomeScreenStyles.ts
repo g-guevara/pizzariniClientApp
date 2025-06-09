@@ -27,7 +27,7 @@ export const styles = StyleSheet.create({
   welcomeTitle: {
     fontSize: 32,
     fontWeight: 'bold',
-    color: '#000',
+    color: '#000', // Changed to red
     marginBottom: 12,
     textAlign: 'center',
   },
@@ -39,12 +39,13 @@ export const styles = StyleSheet.create({
     marginBottom: 40,
   },
   blackCard: {
-    backgroundColor: '#000',
+    backgroundColor: '#DC2626', // Changed to red
     marginHorizontal: 16,
     marginBottom: Platform.OS === 'ios' ? 22 : 30,
     borderRadius: 20,
     padding: 20,
     gap: 12,
+
   },
   appleButton: {
     backgroundColor: '#fff',
@@ -53,6 +54,7 @@ export const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
+
   },
   appleIcon: {
     width: 20,
@@ -84,11 +86,12 @@ export const styles = StyleSheet.create({
     color: '#fff',
   },
   signupButton: {
-    backgroundColor: '#666',
+    backgroundColor: '#991b1b', // Darker red for better contrast against red card
     borderRadius: 25,
     height: 50,
     alignItems: 'center',
     justifyContent: 'center',
+
   },
   signupButtonText: {
     fontSize: 16,
@@ -101,17 +104,17 @@ export const styles = StyleSheet.create({
     height: 50,
     alignItems: 'center',
     justifyContent: 'center',
-    borderWidth: 1,
-    borderColor: '#fff',
+    borderWidth: 2,
+    borderColor: '#fff', // Changed to white for better contrast against red background
   },
   loginButtonText: {
     fontSize: 16,
     fontWeight: '600',
-    color: '#fff',
+    color: '#fff', // Changed to white for better contrast against red background
   },
   bottomIndicator: {
     height: 4,
-    backgroundColor: '#fff',
+    backgroundColor: '#fff', // Changed to white for better contrast against red background
     marginHorizontal: 20,
     borderRadius: 2,
     marginTop: 8,

@@ -1,4 +1,4 @@
-// app/index.tsx - Versión limpia con componentes separados
+// app/index.tsx - Red theme version
 import { useEffect, useState } from "react";
 import {
   ActivityIndicator,
@@ -166,7 +166,7 @@ export default function Index() {
     return (
       <SafeAreaView style={styles.container}>
         <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-          <ActivityIndicator size="large" color="#4285F4" />
+          <ActivityIndicator size="large" color="#DC2626" />
         </View>
       </SafeAreaView>
     );
