@@ -9,6 +9,13 @@ export const styles = StyleSheet.create({
     padding: 20,
     backgroundColor: "#fff",
   },
+  backButton: {
+    position: 'absolute',
+    top: 50,
+    left: 20,
+    zIndex: 1,
+    padding: 10,
+  },
   logoContainer: {
     alignItems: "center",
     marginBottom: 30,
