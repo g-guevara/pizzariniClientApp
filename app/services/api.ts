@@ -41,10 +41,6 @@ export class ApiService {
         console.log(`[API] Response headers:`, Object.fromEntries(response.headers.entries()));
       }
       
-      if (response.status === 401) {
-        throw new Error('Sesión expirada');
-      }
-      
       // Check content type before attempting to parse JSON
       const contentType = response.headers.get('content-type');
       if (contentType && !contentType.includes('application/json')) {
@@ -58,10 +54,20 @@ export class ApiService {
         let errorMessage = `Request failed with status ${response.status}`;
         try {
           const errorData = await response.json();
-          errorMessage = errorData.error || errorMessage;
+          errorMessage = errorData.message || errorData.error || errorMessage;
         } catch (jsonError) {
           console.error('[API] Error parsing error response:', jsonError);
         }
+        
+        // Manejar diferentes tipos de errores 401
+        if (response.status === 401) {
+          // Para rutas protegidas, es sesión expirada
+          if (endpoint !== '/login' && endpoint !== '/users' && endpoint !== '/google-login') {
+            throw new Error('Sesión expirada');
+          }
+          // Para login, usar el mensaje del servidor
+        }
+        
         throw new Error(errorMessage);
       }
       
@@ -163,6 +169,7 @@ export class ApiService {
     });
   }
 
+  // ... resto de métodos permanecen igual
   static async getUsers() {
     return this.fetch('/users');
   }
