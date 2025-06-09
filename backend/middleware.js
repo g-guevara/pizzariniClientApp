@@ -11,7 +11,7 @@ async function connectToDatabase() {
 
   // Connection options optimized for serverless
   const options = {
-    dbName: "sensitivv",
+    dbName: "pizzarini",
     useNewUrlParser: true,
     useUnifiedTopology: true,
     maxPoolSize: 10, // Adjust based on your needs
