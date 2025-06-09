@@ -13,7 +13,7 @@ async function connectToDatabase() {
   const options = {
     dbName: "sensitivv",
     useNewUrlParser: true,
-    useUnifiedTopology: true,
+    useUnifiedTopology: true,   
     maxPoolSize: 10, // Adjust based on your needs
     serverSelectionTimeoutMS: 30000, // 30 seconds
     socketTimeoutMS: 45000, // 45 seconds
