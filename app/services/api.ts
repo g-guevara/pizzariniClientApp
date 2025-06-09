@@ -1,7 +1,7 @@
 // app/services/api.ts - Versión corregida
 import { getUserId } from '../lib/authUtils';
 
-const API_URL = "https://pizzarini-client-app.vercel.app/";
+const API_URL = "https://bhu8vgy7nht5.vercel.app";
 const DEBUG = true; // Cambiar a false en producción
 
 export class ApiService {
