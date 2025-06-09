@@ -27,7 +27,7 @@ async function connectToDatabase() {
   const client = await mongoose.connect(process.env.MONGODB_URI, options);
   console.log("Connected to MongoDB");
   
-  cachedDb = client;
+  cachedDb = client; 
   return client;
 }
 
